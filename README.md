@@ -118,12 +118,9 @@ Here we insert the file with all the selling points, some of the them sales the 
 hadoop fs -put Magazine.csv /spark
 
 
-- #Flume
+- #Hive
 
-With Flume we are going to extract the data from Twitter Api (necessary create an account) using a multiplex configuration.
-    - source: twitter
-    - 2 channels: Memory
-    - 2 sinks: HDFS & Spark
+
     
 
 
