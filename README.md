@@ -1,2 +1,69 @@
 # twitterSparkMagazines
 Estimate selling points for magazines with twitter
+
+The idea of this project is to use the twitter geolocalized that are talking of a concrete magazine in this example Glamour Magazine and check how many magazine's selling points are near of the hot zones without Glamour.
+
+# Setup
+
+For the project we will use: Flume, Hadoop, Kafka & Zookeeper, Spark (Streaming and Batch), Hive and Tableu.
+
+# First Steps
+
+- #kafka
+
+Firstly we need to start Zookeeper
+/<zookeeper-path>/bin/zkServer.sh start
+
+Secondly we will start Kafka
+/<kafka-path>/bin/kafka-server-start.sh -daemon /<kafka-path>/config/server.properties
+
+Then we will create a Topic named Twitter
+/<kafka-path>/bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic twitter --partitions 1 --replication-factor 1
+
+You can launch a consumer for see if kafka is receiving correctly the data
+/<bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic twitter --from-beginning
+
+- #Hadoop
+
+After installing Hadoop correctly and configuring it propertly (core-site.xml, yarn-site.xml,hdfs-site.xml, mapred-site.xml) , we will start Yarn and HDFS
+
+Formating Hadoop file system
+<hadoop-path>/hdfs namenode -format
+
+Starting HDFS
+<hadoop-path>/start-dfs.sh
+
+Starting YARN
+<hadoop-path>/start-yarn.sh
+
+
+I have solved an schema I/O HDFS error, giving permission to the temp path:
+sudo chmod 750 /<hadoop-path>/tmp
+
+Then we create all folders in HDFS and again give permission to access: 
+hadoop fs -mkdir /flume
+hadoop fs -mkdir /flume/raw_data
+hadoop fs -mkdir /spark
+hadoop fs -mkdir /spark/streaming
+
+hadoop fs -chmod -R 777 /flume
+hadoop fs -chmod -R 777 /flume/raw_data
+hadoop fs -chmod -R 777 /spark
+hadoop fs -chmod -R 777 /spark/streaming
+
+Here we insert the file with all the selling points, some of the them sales the magazine the other not.
+hadoop fs -put Magazine.csv /spark
+
+
+- #Flume
+
+With Flume we are going to extract the data from Twitter Api (necessary create an account) using a multiplex configuration.
+    - source: twitter
+    - 2 channels: Memory
+    - 2 sinks: HDFS & Spark
+    
+
+
+
+
+
