@@ -5,7 +5,7 @@ The idea of this project is to use the twitter geolocalized that are talking of 
 
 # Setup
 
-For the project we will use: Flume, Hadoop, Kafka & Zookeeper, Spark (Streaming and Batch), Hive and Tableu.
+For the project we will use: Flume, Hadoop, Kafka & Zookeeper, Spark (Streaming and Batch) and Carto.
 
 # First Steps
 
@@ -98,32 +98,11 @@ When we are going to distribute the magazine, we will stop the streaming process
 As most of the tweets are without geo position and we neither have the geo position for the selling points, we have generate (Madrid aprox. ones) with a random process.
 you can use [Json Data Generator](https://github.com/acesinc/json-data-generator) or creating your own one.
 
+Starting spark streaming code:
 
+`/<spark-path>/bin/spark-submit --jars /<spark-path>/lib/spark-streaming-kafka-assembly_2.10-1.6.2.jar /<user-path>/PycharmProjects/Twitter/streaming.py`
 
-I have solved an schema I/O HDFS error, giving permission to the temp path:
-sudo chmod 750 /<hadoop-path>/tmp
+- # Carto
 
-Then we create all folders in HDFS and again give permission to access: 
-hadoop fs -mkdir /flume
-hadoop fs -mkdir /flume/raw_data
-hadoop fs -mkdir /spark
-hadoop fs -mkdir /spark/streaming
-
-hadoop fs -chmod -R 777 /flume
-hadoop fs -chmod -R 777 /flume/raw_data
-hadoop fs -chmod -R 777 /spark
-hadoop fs -chmod -R 777 /spark/streaming
-
-Here we insert the file with all the selling points, some of the them sales the magazine the other not.
-hadoop fs -put Magazine.csv /spark
-
-
-- #Hive
-
-
-    
-
-
-
-
+Finally in the Spark batch code we save the info of all the twitter points and the info of the new selling points in two csv files, and with these two files we generate a map with Carto
 
