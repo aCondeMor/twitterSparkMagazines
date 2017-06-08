@@ -1,0 +1,40 @@
+# Sources, channels and sinks are defined per agent,
+# in this case called 'twitter'
+
+# Name the components on this agent
+twitter.sources = tweet
+twitter.sinks = HDFS Kafka 
+twitter.channels = mem2 mem1
+twitter.sources.tweet.channels = mem2 mem1
+twitter.sinks.HDFS.channel = mem1
+twitter.sinks.Kafka.channel = mem2
+
+twitter.channels.mem1.type = memory
+twitter.channels.mem1.capacity = 1000
+twitter.channels.mem1.transactionCapacity = 1000
+
+twitter.channels.mem2.type = memory
+twitter.channels.mem2.capacity = 1000
+twitter.channels.mem2.transactionCapacity = 1000
+ 
+twitter.sources.tweet.type = com.cloudera.flume.source.TwitterSource
+twitter.sources.tweet.consumerKey = dtbjLI4u0qsCXcSGJ8jeULlKP
+twitter.sources.tweet.consumerSecret = mlTcxdZkCqHBU4EsVE0utS04FRKbLn8rI5uNU0fS2yo53bk0GG
+twitter.sources.tweet.accessToken = 60899158-mNJAnkVeqSpl8WMSEHQaUpJeguMLRzhZ9I42rSa7n
+twitter.sources.tweet.accessTokenSecret = vgLlIg6eJTKNvmwGUpSPje0tum0v4YtI5tAONOn7MWxZ8
+twitter.sources.tweet.keywords = @glamourmag,@glamour_fashion, glamourmag, fashion
+twitter.sources.tweet.languages=en,En
+
+
+twitter.sinks.HDFS.type = hdfs
+twitter.sinks.HDFS.hdfs.useLocalTimeStamp = true
+twitter.sinks.HDFS.hdfs.path = hdfs://localhost:9000/flume/raw_data/%Y/%m/%d/%H/
+twitter.sinks.HDFS.hdfs.fileType = DataStream
+twitter.sinks.HDFS.hdfs.writeFormat = Text
+twitter.sinks.HDFS.hdfs.batchSize = 1000
+twitter.sinks.HDFS.hdfs.rollSize = 0
+twitter.sinks.HDFS.hdfs.rollCount = 10000
+
+twitter.sinks.Kafka.type = org.apache.flume.sink.kafka.KafkaSink
+twitter.sinks.Kafka.kafka.topic = twitter
+twitter.sinks.Kafka.kafka.bootstrap.servers = localhost:9092
