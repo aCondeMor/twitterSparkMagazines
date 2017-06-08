@@ -18,10 +18,10 @@ twitter.channels.mem2.capacity = 1000
 twitter.channels.mem2.transactionCapacity = 1000
  
 twitter.sources.tweet.type = com.cloudera.flume.source.TwitterSource
-twitter.sources.tweet.consumerKey = dtbjLI4u0qsCXcSGJ8jeULlKP
-twitter.sources.tweet.consumerSecret = mlTcxdZkCqHBU4EsVE0utS04FRKbLn8rI5uNU0fS2yo53bk0GG
-twitter.sources.tweet.accessToken = 60899158-mNJAnkVeqSpl8WMSEHQaUpJeguMLRzhZ9I42rSa7n
-twitter.sources.tweet.accessTokenSecret = vgLlIg6eJTKNvmwGUpSPje0tum0v4YtI5tAONOn7MWxZ8
+twitter.sources.tweet.consumerKey = <consumerKey>
+twitter.sources.tweet.consumerSecret = <consumerSecret>
+twitter.sources.tweet.accessToken = <accesToken> 
+twitter.sources.tweet.accessTokenSecret = <accessTokenSecret>
 twitter.sources.tweet.keywords = @glamourmag,@glamour_fashion, glamourmag, fashion
 twitter.sources.tweet.languages=en,En
 
