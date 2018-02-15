@@ -1,7 +1,7 @@
 # twitterSparkMagazines
 Estimate selling points for magazines with twitter
 
-The idea of this project is to use the twitter geolocalized that are talking of a concrete magazine in this example Glamour Magazine and check how many magazine's selling points are near of the hot zones without Glamour.
+The idea of this project is to use the geolocalized tweets that are talking of a concrete magazine (in this example Glamour Magazine) and check how many magazine's selling points are near of the hot zones without Glamour in their portfolio.
 
 # Setup
 
@@ -91,12 +91,12 @@ For start flume agent:
 
 - #Spark
 
-With spark we are going to work with streaming and finally with batch. The idea is to be getting tweets days before the magazine is going to be put on sale, and we do this with Spark Streaming and saving the results (Geo Coordinates) as the keywords and language are set in the flume configuration we don't need any more from the tweets in this concrete exercise.
+With spark we are going to work with streaming and finally with batch. The idea is to be getting tweets somes days before of the magazine launch date and we do this with Spark Streaming and saving the results (Geo Coordinates). As the keywords and language are set in the flume configuration we don't need any more data from the tweets in this concrete exercise.
 
 When we are going to distribute the magazine, we will stop the streaming process and get from HDFS the geo coordinate tweet's information and also the file with all the info of the selling points.(code, name, address, province, sales data, geo coordinates)
 
 As most of the tweets are without geo position and we neither have the geo position for the selling points, we have generate (Madrid aprox. ones) with a random process.
-you can use [Json Data Generator](https://github.com/acesinc/json-data-generator) or creating your own one.
+you can use [Json Data Generator](https://github.com/acesinc/json-data-generator) or create your own.
 
 Starting spark streaming code:
 
